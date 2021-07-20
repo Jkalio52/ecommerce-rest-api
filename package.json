@@ -1,0 +1,11 @@
+{
+  "name": "ecommerce-rest-api",
+  "version": "1.0.0",
+  "description": "Codecademy's E-Commerce App (REST API) Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jay Kalio",
+  "license": "ISC"
+}
