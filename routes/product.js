@@ -5,6 +5,8 @@ const router = express.Router();
 const ProductService = require('../services/ProductService');
 const ProductServiceInstance = new ProductService();
 
+
+// Set up product endpoints
 module.exports = (app) => {
    app.use('/products', router);
 
