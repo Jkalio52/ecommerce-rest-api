@@ -1,4 +1,6 @@
-// API endpoints that will be used in retrieving data from your database
+// Set up user registration api
+// Add the logic for handling registration of new users.
+
 const express = require('express');
 const router = express.Router();
 
@@ -23,6 +25,8 @@ module.exports = (app, passport) => {
    });
   
 
+  // Set up local login
+  // Add the logic for handling login using a username and password.
   // Login Endpoint
   router.post('/login', passport.authenticate('local'), async (req, res, next) => {
      try {
