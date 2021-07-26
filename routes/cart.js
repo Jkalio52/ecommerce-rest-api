@@ -1,24 +1,22 @@
 // API endpoints that will be used in retrieving data from your database
+// Set up cart endpoint
 const express = require('express');
 const router = express.Router();
 const CartService = require('../services/CartService');
 
-
 const CartServiceInstance = new CartService();
 
+
+// Add the logic for handling CRUD operations related to a user’s cart
+// The cart should keep track of products a user wants to purchase.
 module.exports = (app, passport) => {
-
-  app.use('/carts', router);
-
-
-  router.get('/mine', async (req, res, next) => {
+   app.use('/carts', router);
+   router.get('/mine', async (req, res, next) => {
       try {
          const { id } = req.user;
-         
          const response = await CartServiceInstance.loadCart(id);
 
          res.status(200).send(response);
-
       } catch(err) {
          next(err);
       }
