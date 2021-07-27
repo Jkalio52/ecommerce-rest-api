@@ -10,7 +10,7 @@ module.exports = class CartItemModel {
    * @return {Object|null}      [Created cart item]
    */
   static async create(data) {
-    try {
+     try {
 
       // Generate SQL statement - using helper for dynamic parameter injection
       const statement = pgp.helpers.insert(data, null, 'cartItems') + 'RETURNING *';
@@ -19,15 +19,13 @@ module.exports = class CartItemModel {
       const result = await db.query(statement);
 
       if (result.rows?.length) {
-        return result.rows[0];
+         return result.rows[0];
       }
-
       return null;
-
-    } catch(err) {
-      throw new Error(err);
-    }
-  }
+      } catch(err) {
+       throw new Error(err);
+      }
+   }
 
   /**
    * Updates existing cart item
@@ -36,25 +34,24 @@ module.exports = class CartItemModel {
    * @return {Object|null}      [Updated cart item]
    */
   static async update(id, data) {
-    try {
-
-      // Generate SQL statement - using helper for dynamic parameter injection
-      const condition = pgp.as.format('WHERE id = ${id} RETURNING *', { id });
-      const statement = pgp.helpers.update(data, null, 'cartItems') + condition;
+     try {
+        // Generate SQL statement - using helper for dynamic parameter injection
+        const condition = pgp.as.format('WHERE id = ${id} RETURNING *', { id });
+        const statement = pgp.helpers.update(data, null, 'cartItems') + condition;
   
-      // Execute SQL statment
-      const result = await db.query(statement);
+        // Execute SQL statment
+        const result = await db.query(statement);
 
-      if (result.rows?.length) {
-        return result.rows[0];
+        if (result.rows?.length) {
+           return result.rows[0];
+         }
+
+         return null;
+
+      } catch(err) {
+         throw new Error(err);
       }
-
-      return null;
-
-    } catch(err) {
-      throw new Error(err);
-    }
-  }
+   }
 
   /**
    * Retrieve cart items for a cart
@@ -62,31 +59,31 @@ module.exports = class CartItemModel {
    * @return {Array}         [Created cart item]
    */
   static async find(cartId) {
-    try {
-
-      // Generate SQL statement
-      const statement = `SELECT 
+     try {
+        
+        // Generate SQL statement
+        const statement = `SELECT 
                             ci.qty,
                             ci.id AS "cartItemId", 
                             p.*
                          FROM "cartItems" ci
                          INNER JOIN products p ON p.id = ci."productId"
                          WHERE "cartId" = $1`
-      const values = [cartId];
+        const values = [cartId];
   
       // Execute SQL statment
       const result = await db.query(statement, values);
 
       if (result.rows?.length) {
-        return result.rows;
+         return result.rows;
       }
 
       return [];
 
     } catch(err) {
-      throw new Error(err);
-    }
-  }
+       throw new Error(err);
+      }
+   }
 
   /**
    * Deletes a cart line item
@@ -94,27 +91,26 @@ module.exports = class CartItemModel {
    * @return {Object|null}    [Deleted cart item]
    */
   static async delete(id) {
-    try {
-
-      // Generate SQL statement
-      const statement = `DELETE
+     try {
+        
+        // Generate SQL statement
+        const statement = `DELETE
                          FROM "cartItems"
                          WHERE id = $1
                          RETURNING *`;
-      const values = [id];
+        const values = [id];
   
-      // Execute SQL statment
-      const result = await db.query(statement, values);
+        // Execute SQL statment
+        const result = await db.query(statement, values);
 
-      if (result.rows?.length) {
-        return result.rows[0];
+        if (result.rows?.length) {
+           return result.rows[0];
+         }
+
+       return null;
+
+      } catch(err) {
+         throw new Error(err);
       }
-
-      return null;
-
-    } catch(err) {
-      throw new Error(err);
-    }
-  }
-
+   }
 }
