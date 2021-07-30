@@ -1,31 +1,31 @@
 const db = require('../db');
 
+
 module.exports = class ProductModel {
 
-  /**
+   /**
    * List products
    * @param  {Object} options [Query options]
    * @return {Array}          [Array of products]
    */
-  async find(options = {}) {
-    try {
+   async find(options = {}) {
+      try {
 
-      const statement = `SELECT *
-                         FROM products`;
-      const values = [];
-  
-      const result = await db.query(statement, values);
+         const statement = `SELECT *
+                           FROM products`;
+         const values = [];
+   
+         const result = await db.query(statement, values);
 
-      if (result.rows?.length) {
-        return result.rows;
+         if (result.rows?.length) {
+            return result.rows;
+         }
+
+         return [];
+      } catch(err) {
+         throw err;
       }
-
-      return [];
-
-    } catch(err) {
-      throw err;
-    }
-  }
+   }
 
   /**
    * Retrieve product by ID
