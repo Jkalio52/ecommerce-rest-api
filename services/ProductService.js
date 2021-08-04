@@ -2,8 +2,8 @@ const createError = require('http-errors');
 const ProductModel = require('../models/product');
 const ProductModelInstance = new ProductModel();
 
-module.exports = class ProductService {
 
+module.exports = class ProductService {
   async list(options) {
 
     try {
@@ -11,15 +11,12 @@ module.exports = class ProductService {
       const products = await ProductModelInstance.find(options);
 
       return products;
-
     } catch(err) {
       throw err;
     }
-
   };
 
   async get(id) {
-
     try {
       // Check if product exists
       const product = await ProductModelInstance.findOne(id);
@@ -30,11 +27,8 @@ module.exports = class ProductService {
       }
 
       return product;
-
     } catch(err) {
       throw err;
     }
-
   };
-
 }
