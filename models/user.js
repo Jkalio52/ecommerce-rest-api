@@ -26,7 +26,7 @@ module.exports = class UserModel {
          throw new Error(err);
       }
    }
-
+   
    /**
    * Updates a user record
    * @param  {Object}      data [User data]
