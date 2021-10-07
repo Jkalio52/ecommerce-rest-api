@@ -39,3 +39,4 @@ module.exports = (app, passport) => {
       }
    });
 }
+
